@@ -1,4 +1,5 @@
 เปิด folder frontend ด้วย vscode
+	ใช้คำสั่ง npm install
 	ใช้คำสั่ง npm run dev เปิดตัว frontend
 	เปิด http://localhost:3000
 document สำหรับ template ที่ใช้
