@@ -13,7 +13,7 @@
       ></i>
       <a class="m-0 navbar-brand" href="/">
         <img :src="logo" class="navbar-brand-img h-100" alt="main_logo" />
-        <span class="ms-1 font-weight-bold">Vite Soft UI Dashboard</span>
+        <span class="ms-1 font-weight-bold">Library</span>
       </a>
     </div>
     <hr class="mt-0 horizontal dark" />
@@ -22,7 +22,7 @@
 </template>
 <script>
 import SidenavList from "./SidenavList.vue";
-import logo from "@/assets/img/logo-ct.png";
+import logo from "../img/library-logo-template-design-free-vector.jpg";
 
 export default {
   name: "IndexComponent",

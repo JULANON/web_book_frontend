@@ -16,13 +16,18 @@ import { createPinia } from 'pinia';
 import App from './App.vue';
 import router from "./router";
 import store from "./store";
-import VueSweetalert2 from 'vue-sweetalert2';
+// import VueSweetalert2 from 'vue-sweetalert2';
 import "./assets/css/nucleo-icons.css";
 import "./assets/css/nucleo-svg.css";
+import "./assets/css/test.css";
 import SoftUIDashboard from "./soft-ui-dashboard";
+// import VueCarousel from './soft-ui-carousel';
+
+
 
 const app = createApp(App);
 const pinia = createPinia();
+
 app.use(pinia)
 app.use(router)
 app.use(store)
