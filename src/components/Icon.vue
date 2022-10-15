@@ -29,7 +29,7 @@
       </g>
     </g>
   </svg>
-  <svg
+  <!-- <svg
     v-if="name === 'virtual-reality'"
     width="12px"
     height="12px"
@@ -60,7 +60,7 @@
         </g>
       </g>
     </g>
-  </svg>
+  </svg> -->
   <!-- pages- office icon -->
   <svg
     v-if="name === 'tables'"
@@ -91,7 +91,7 @@
     </g>
   </svg>
   <!-- applications - settings icon -->
-  <svg
+  <!-- <svg
     v-if="name === 'rtl-page'"
     width="12px"
     height="12px"
@@ -123,7 +123,7 @@
         </g>
       </g>
     </g>
-  </svg>
+  </svg> -->
 
   <!-- Authentication - document icon -->
   <svg

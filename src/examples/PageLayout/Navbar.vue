@@ -39,7 +39,7 @@
                 aria-hidden="true"
                 :class="isBlur ? 'text-dark' : 'text-white'"
               ></i>
-              Dashboard
+              Home
             </router-link>
           </li>
           <li class="nav-item">
@@ -52,28 +52,10 @@
               Profile
             </router-link>
           </li>
-          <li class="nav-item">
-            <router-link class="nav-link me-2" to="/sign-up">
-              <i
-                class="fas fa-user-circle opacity-6 me-1"
-                aria-hidden="true"
-                :class="isBlur ? 'text-dark' : 'text-white'"
-              ></i>
-              Sign Up
-            </router-link>
-          </li>
-          <li class="nav-item">
-            <router-link class="nav-link me-2" to="/sign-in">
-              <i
-                class="fas fa-key opacity-6 me-1"
-                aria-hidden="true"
-                :class="isBlur ? 'text-dark' : 'text-white'"
-              ></i>
-              Sign In
-            </router-link>
-          </li>
+          
+         
         </ul>
-        <ul class="navbar-nav d-lg-block d-none">
+        <!-- <ul class="navbar-nav d-lg-block d-none">
           <li class="nav-item">
             <a
               href="https://www.creative-tim.com/product/vue-soft-ui-dashboard"
@@ -81,7 +63,7 @@
               :class="isBlur ? 'bg-gradient-dark' : 'bg-gradient-success'"
             >Free download</a>
           </li>
-        </ul>
+        </ul> -->
       </div>
     </div>
   </nav>
