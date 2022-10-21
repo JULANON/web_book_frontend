@@ -22,6 +22,8 @@ import "./assets/css/nucleo-svg.css";
 import "./assets/css/test.css";
 import SoftUIDashboard from "./soft-ui-dashboard";
 // import VueCarousel from './soft-ui-carousel';
+import 'sweetalert2/dist/sweetalert2.min.css';
+
 
 
 

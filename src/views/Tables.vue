@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import AuthorsTable from "./components/AuthorsTable.vue";
+import AuthorsTable from "./components/HistoryTable.vue";
 import ProjectsTable from "./components/ProjectsTable.vue";
 
 export default {

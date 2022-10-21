@@ -15,20 +15,19 @@
         </sidenav-collapse>
       </li>
       <li class="nav-item">
-        <sidenav-collapse nav-text="History" :to="{ name: 'History' }">
-          <template #icon>
-            <i class="fa fa-history" style="font-size:25px; color: black;"></i>
-          </template>
-        </sidenav-collapse>
-      </li>
-      <li class="nav-item">
-        <sidenav-collapse nav-text="Profile" :to="{ name: 'Profile' }">
+        <sidenav-collapse nav-text="Manage Book" :to="{ name: 'ManageBook' }">
           <template #icon>
             <i class="fa fa-user-circle-o" style="font-size:24px; color:black"></i>
           </template>
         </sidenav-collapse>
       </li>
-      
+      <li class="nav-item">
+        <sidenav-collapse nav-text="History" :to="{ name: 'Billing' }">
+          <template #icon>
+            <i class="fa fa-history" style="font-size:25px; color: black;"></i>
+          </template>
+        </sidenav-collapse>
+      </li>
     </ul>
   </div>
   
@@ -58,7 +57,6 @@ export default {
       isActive: "active",
     };
   },
- 
   methods: {
     getRoute() {
       const routeArr = this.$route.path.split("/");
@@ -67,7 +65,6 @@ export default {
   },
 };
 </script>
-
 <style scoped>
 .active i {
   color: #fff !important;

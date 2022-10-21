@@ -1,526 +1,196 @@
+<script>
+import Pagination from "@/components/VsudPagination.vue";
+import PaginationItem from "@/components/VsudPaginationItem.vue";
+export default {
+  name: 'DashboardDefault',
+  components: {
+    Pagination,
+    PaginationItem,
+  },
+  data () {
+    return {
+      selected: null,
+    }
+  }, 
+ 
+}
+</script>
+<script setup>
+    import { useBooksStore } from '@/store/books';
+    import { useUserStore } from "@/store/user";
+    import { onMounted } from 'vue';
+    const user = useUserStore();
+    const books = useBooksStore();
+    function get_id(id){
+      books.$patch({
+        id: id,
+    });
+    }
+    books.get_overall_book();
+    function next(){
+        books.$patch({
+          page_selected: books.page_selected+1
+        });
+        books.get_overall_book();
+    }
+
+    function prev(){
+        books.$patch({
+          page_selected: books.page_selected-1
+        });
+        books.get_overall_book();
+    }
+
+    function select(num){
+      books.$patch({
+          page_selected: num
+        });
+      books.get_overall_book();
+    }
+
+    async function search(){
+      let search = document.querySelector('#search');
+      if(search.value){
+        await books.$patch({
+          keyword: search.value
+        });
+        await books.search_book();
+      }else{
+        await books.$patch({
+          topic: "book_id",
+          order: "ASC",
+        });
+        await books.get_count_book();
+        location.reload();
+      }
+    }
+
+    function order(){
+      let order = document.querySelector('#order');
+      if(order.value === '1'){
+        books.$patch({
+          topic: "title",
+          order: "ASC",
+        });
+      }else if(order.value === '2'){
+        books.$patch({
+          topic: "title",
+          order: "DESC",
+        });
+      }else if(order.value === '3'){
+        books.$patch({
+          topic: "book_id",
+          order: "DESC",
+        });
+      }else if(order.value === '4'){
+        books.$patch({
+          topic: "book_id",
+          order: "ASC",
+        });
+      }
+      books.get_overall_book();
+    }
+    
+    onMounted(() => {
+      user.getUserDetail();
+      books.get_count_book();
+    });
+</script>
 <template>
-  <div class="py-4 container-fluid">
-    <div class="row">
-      <div class="col-12">
-        <div class="card mb-4">
-          <div class="card-header pb-0">
-            <div class="d-flex flex-row mb-3  justify-content-end">
-              <div class="p-2">order by:</div>
-              <div class="p-2 ">
-                <select v-model="selected" style="width: 130px;">
-                  <option>A</option>
-                  <option>B</option>
-                  <option>C</option>
-                </select>
-              </div>
-              <div class="p-2">show:</div>
-              <div class="p-2">
-                <select v-model="selected" style="width: 90px;">
-                  <option>A</option>
-                  <option>B</option>
-                  <option>C</option>
-                </select>
-              </div>
-              <div class="p-2">per page</div>
-            </div>
-            <div class="mt-3">
-<!-- Selected: <strong>{{ selected }}</strong> เอาไว้ค้นหาแล้วแสดงรายการ-->
-              <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" data-interval="1500">
-                <ol class="carousel-indicators">
-                  <li data-target="#" data-slide-to="0" class="active numberli">1</li>
-                  <li data-target="#" data-slide-to="1" class="numberli">2</li>
-                  <li data-target="#" data-slide-to="2" class="numberli">3</li>
-                  <li data-target="#" data-slide-to="1" class="numberli">4</li>
-                  <li data-target="#" data-slide-to="2" class="numberli">5</li>
-                  <li data-target="#" data-slide-to="2" class="numberli">...</li>
-                </ol>
-                <div class="carousel-inner">
-                  <div class="carousel-item active">
-                    <div class="container">
-                      <div class="d-flex justify-content-around">
-                      <div class="d-flex flex-row">
-                        <div class="p-2">
-                          <img
-                            src="../public/image/dark_green_book.png"
-                            alt=""
-                            style="width: 100px;"
-                            onclick=""
-                          />
-                        </div>
-                        <div class="p-2">
-                          <h4>Title</h4>
-                          <br />
-                          <p>Author</p>
-                          <br />
-                          <p>Pulisher</p>
-                        </div>
-                      </div>
-                      <div class="d-flex flex-row">
-                        <div class="p-2">
-                          <img
-                            src="../public/image/blue_book.png"
-                            alt=""
-                            style="width: 100px;"
-                          />
-                        </div>
-                        <div class="p-2">
-                          <h4>Title</h4>
-                          <br />
-                          <p>Author</p>
-                          <br />
-                          <p>Pulisher</p>
-                        </div>
-                      </div>
-                      </div>
-                    <!--  -->
-                    <div class="d-flex justify-content-around">
-                      <div class="d-flex flex-row">
-                        <div class="p-2">
-                          <img
-                            src="../public/image/crimson_book.png"
-                            alt=""
-                            style="width: 100px;"
-                          />
-                        </div>
-                        <div class="p-2">
-                          <h4>Title</h4>
-                          <br />
-                          <p>Author</p>
-                          <br />
-                          <p>Pulisher</p>
-                        </div>
-                      </div>
-                      <div class="d-flex flex-row">
-                        <div class="p-2">
-                          <img
-                            src="../public/image/gray_book.png"
-                            alt=""
-                            style="width: 100px;"
-                          />
-                        </div>
-                        <div class="p-2">
-                          <h4>Title</h4>
-                          <br />
-                          <p>Author</p>
-                          <br />
-                          <p>Pulisher</p>
-                        </div>
-                      </div>
-                    </div>
-    <!--  -->
-                    <div class="d-flex justify-content-around">
-                      <div class="d-flex flex-row">
-                        <div class="p-2">
-                          <img
-                            src="../public/image/red_book.png"
-                            alt=""
-                            style="width: 100px;"
-                          />
-                        </div>
-                        <div class="p-2">
-                          <h4>Title</h4>
-                          <br />
-                          <p>Author</p>
-                          <br />
-                          <p>Pulisher</p>
-                        </div>
-                      </div>
-                      <div class="d-flex flex-row">
-                        <div class="p-2">
-                          <img
-                            src="../public/image/sky_book.png"
-                            alt=""
-                            style="width: 100px;"
-                          />
-                        </div>
-                        <div class="p-2">
-                          <h4>Title</h4>
-                          <br />
-                          <p>Author</p>
-                          <br />
-                          <p>Pulisher</p>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div class="d-flex justify-content-around">
-                      <div class="d-flex flex-row">
-                        <div class="p-2">
-                          <img
-                            src="../public/image/white_book.png"
-                            alt=""
-                            style="width: 100px;"
-                          />
-                        </div>
-                        <div class="p-2">
-                          <h4>Title</h4>
-                          <br />
-                          <p>Author</p>
-                          <br />
-                          <p>Pulisher</p>
-                        </div>
-                      </div>
-                      <div class="d-flex flex-row">
-                        <div class="p-2">
-                          <img
-                            src="../public/image/yellow_book.png"
-                            alt=""
-                            style="width: 100px;"
-                          />
-                        </div>
-                        <div class="p-2">
-                          <h4>Title</h4>
-                          <br />
-                          <p>Author</p>
-                          <br />
-                          <p>Pulisher</p>
-                        </div>
-                      </div>
-                    </div>
-                    </div>
-                  </div>
-                  <div class="carousel-item">
-                    <div class="container">
-                      <div class="d-flex justify-content-around">
-                      <div class="d-flex flex-row">
-                        <div class="p-2">
-                          <img
-                            src="../public/image/dark_green_book.png"
-                            alt=""
-                            style="width: 100px;"
-                            onclick=""
-                          />
-                        </div>
-                        <div class="p-2">
-                          <h4>Title</h4>
-                          <br />
-                          <p>Author</p>
-                          <br />
-                          <p>Pulisher</p>
-                        </div>
-                      </div>
-                      <div class="d-flex flex-row">
-                        <div class="p-2">
-                          <img
-                            src="../public/image/blue_book.png"
-                            alt=""
-                            style="width: 100px;"
-                          />
-                        </div>
-                        <div class="p-2">
-                          <h4>Title</h4>
-                          <br />
-                          <p>Author</p>
-                          <br />
-                          <p>Pulisher</p>
-                        </div>
-                      </div>
-                      </div>
-                    <!--  -->
-                    <div class="d-flex justify-content-around">
-                      <div class="d-flex flex-row">
-                        <div class="p-2">
-                          <img
-                            src="../public/image/crimson_book.png"
-                            alt=""
-                            style="width: 100px;"
-                          />
-                        </div>
-                        <div class="p-2">
-                          <h4>Title</h4>
-                          <br />
-                          <p>Author</p>
-                          <br />
-                          <p>Pulisher</p>
-                        </div>
-                      </div>
-                      <div class="d-flex flex-row">
-                        <div class="p-2">
-                          <img
-                            src="../public/image/gray_book.png"
-                            alt=""
-                            style="width: 100px;"
-                          />
-                        </div>
-                        <div class="p-2">
-                          <h4>Title</h4>
-                          <br />
-                          <p>Author</p>
-                          <br />
-                          <p>Pulisher</p>
-                        </div>
-                      </div>
-                    </div>
-    <!--  -->
-                    <div class="d-flex justify-content-around">
-                      <div class="d-flex flex-row">
-                        <div class="p-2">
-                          <img
-                            src="../public/image/red_book.png"
-                            alt=""
-                            style="width: 100px;"
-                          />
-                        </div>
-                        <div class="p-2">
-                          <h4>Title</h4>
-                          <br />
-                          <p>Author</p>
-                          <br />
-                          <p>Pulisher</p>
-                        </div>
-                      </div>
-                      <div class="d-flex flex-row">
-                        <div class="p-2">
-                          <img
-                            src="../public/image/sky_book.png"
-                            alt=""
-                            style="width: 100px;"
-                          />
-                        </div>
-                        <div class="p-2">
-                          <h4>Title</h4>
-                          <br />
-                          <p>Author</p>
-                          <br />
-                          <p>Pulisher</p>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div class="d-flex justify-content-around">
-                      <div class="d-flex flex-row">
-                        <div class="p-2">
-                          <img
-                            src="../public/image/white_book.png"
-                            alt=""
-                            style="width: 100px;"
-                          />
-                        </div>
-                        <div class="p-2">
-                          <h4>Title</h4>
-                          <br />
-                          <p>Author</p>
-                          <br />
-                          <p>Pulisher</p>
-                        </div>
-                      </div>
-                      <div class="d-flex flex-row">
-                        <div class="p-2">
-                          <img
-                            src="../public/image/yellow_book.png"
-                            alt=""
-                            style="width: 100px;"
-                          />
-                        </div>
-                        <div class="p-2">
-                          <h4>Title</h4>
-                          <br />
-                          <p>Author</p>
-                          <br />
-                          <p>Pulisher</p>
-                        </div>
-                      </div>
-                    </div>
-                    </div>
-                  </div>
-                  <div class="carousel-item">
-                    <div class="container">
-                      <div class="d-flex justify-content-around">
-                      <div class="d-flex flex-row">
-                        <div class="p-2">
-                          <img
-                            src="../public/image/dark_green_book.png"
-                            alt=""
-                            style="width: 100px;"
-                            onclick=""
-                          />
-                        </div>
-                        <div class="p-2">
-                          <h4>Title</h4>
-                          <br />
-                          <p>Author</p>
-                          <br />
-                          <p>Pulisher</p>
-                        </div>
-                      </div>
-                      <div class="d-flex flex-row">
-                        <div class="p-2">
-                          <img
-                            src="../public/image/blue_book.png"
-                            alt=""
-                            style="width: 100px;"
-                          />
-                        </div>
-                        <div class="p-2">
-                          <h4>Title</h4>
-                          <br />
-                          <p>Author</p>
-                          <br />
-                          <p>Pulisher</p>
-                        </div>
-                      </div>
-                      </div>
-                    <!--  -->
-                    <div class="d-flex justify-content-around">
-                      <div class="d-flex flex-row">
-                        <div class="p-2">
-                          <img
-                            src="../public/image/crimson_book.png"
-                            alt=""
-                            style="width: 100px;"
-                          />
-                        </div>
-                        <div class="p-2">
-                          <h4>Title</h4>
-                          <br />
-                          <p>Author</p>
-                          <br />
-                          <p>Pulisher</p>
-                        </div>
-                      </div>
-                      <div class="d-flex flex-row">
-                        <div class="p-2">
-                          <img
-                            src="../public/image/gray_book.png"
-                            alt=""
-                            style="width: 100px;"
-                          />
-                        </div>
-                        <div class="p-2">
-                          <h4>Title</h4>
-                          <br />
-                          <p>Author</p>
-                          <br />
-                          <p>Pulisher</p>
-                        </div>
-                      </div>
-                    </div>
-    <!--  -->
-                    <div class="d-flex justify-content-around">
-                      <div class="d-flex flex-row">
-                        <div class="p-2">
-                          <img
-                            src="../public/image/red_book.png"
-                            alt=""
-                            style="width: 100px;"
-                          />
-                        </div>
-                        <div class="p-2">
-                          <h4>Title</h4>
-                          <br />
-                          <p>Author</p>
-                          <br />
-                          <p>Pulisher</p>
-                        </div>
-                      </div>
-                      <div class="d-flex flex-row">
-                        <div class="p-2">
-                          <img
-                            src="../public/image/sky_book.png"
-                            alt=""
-                            style="width: 100px;"
-                          />
-                        </div>
-                        <div class="p-2">
-                          <h4>Title</h4>
-                          <br />
-                          <p>Author</p>
-                          <br />
-                          <p>Pulisher</p>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div class="d-flex justify-content-around">
-                      <div class="d-flex flex-row">
-                        <div class="p-2">
-                          <img
-                            src="../public/image/white_book.png"
-                            alt=""
-                            style="width: 100px;"
-                          />
-                        </div>
-                        <div class="p-2">
-                          <h4>Title</h4>
-                          <br />
-                          <p>Author</p>
-                          <br />
-                          <p>Pulisher</p>
-                        </div>
-                      </div>
-                      <div class="d-flex flex-row">
-                        <div class="p-2">
-                          <img
-                            src="../public/image/yellow_book.png"
-                            alt=""
-                            style="width: 100px;"
-                          />
-                        </div>
-                        <div class="p-2">
-                          <h4>Title</h4>
-                          <br />
-                          <p>Author</p>
-                          <br />
-                          <p>Pulisher</p>
-                        </div>
-                      </div>
-                    </div>
-                    </div>
-                    <!-- <img class="d-block w-100" src="..." alt="Third slide"> -->
-                  </div>
-                </div>
-                <!-- <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                  <span class="sr-only">Previous</span>
-                </a>
-                <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                  <span class="sr-only">Next</span>
-                </a> -->
-              </div>
-
-            </div>
+  <div class="container d-flex justify-content-center">
+    <div class="row m-5">
+      <div class="mb-5 d-flex justify-content-end">
+          <div class="input-group me-3" style="max-width: 200px;">
+              <span class="input-group-text text-body">
+                <i class="fas fa-search" aria-hidden="true"></i>
+              </span>
+              <input
+                id="search"
+                type="text"
+                class="form-control"
+                :placeholder="
+                  'Search here...'
+                "
+                @keyup="search"
+              /> 
           </div>
-          <!-- <div class="card-body px-0 pt-0 pb-2">
-            <ul class="w3-pagination">
-              <li><a href="#">«</a></li>
-              <li><a href="#">1</a></li>
-              <li><a href="#">2</a></li>
-              <li><a href="#">3</a></li>
-              <li><a href="#">4</a></li>
-              <li><a href="#">5</a></li>
-              <li><a href="#">...</a></li>
-              <li><a href="#">»</a></li>
-            </ul>
-          </div> -->
-          
-          <!-- <div class="d-flex justify-content-center">
-            <carousel :per-page="1" :navigate-to="someLocalProperty" :mouse-drag="false">
-              <slide>
-                Slide 1 Content
-              </slide>
-              <slide>
-                Slide 2 Content
-              </slide>
-            </carousel>
-          </div> -->
+          <div class="input-group" style="max-width: 150px;">
+            <select id="order" @change="order" class="form-select">
+                <option value="" selected disabled> Order By </option>
+                <option value="1">Title A-Z</option>
+                <option value="2">Title Z-A</option>
+                <option value="3">Newest</option>
+                <option value="4">Oldest</option>
+            </select>
+          </div>
+      </div>
+      <div class="col-6 book" v-for="(item) in books.books" :key="item.book_id">
+        <div class="d-flex flex-row">
+            <div class="p-2">
+              <img v-bind:src="'/image/'+item.book_img"/>
+            </div>
+            <router-link @click="get_id(item.book_id)" value="" to="/detail">
+            <div class="p-2">
+              <h4>" {{ item.title }} "</h4>
+              <p v-if="item.book_authors[0]">Author : {{ item.book_authors[0].author.author_name }}</p>
+              <p v-else>Author : - </p>
+              <p>Publisher : {{ item.publisher.publisher_name }}</p>
+            </div>
+            </router-link>
         </div>
+      </div>
+    
+      
+      <div class="page_list d-flex justify-content-center mt-5">
+        <pagination color="success">
+          <pagination-item class="me-3" v-if="(books.page_selected === 1)" prev disabled/>
+          <pagination-item class="me-3" @click="prev" v-else prev/>
+          <pagination-item :label="1" v-if="(books.page_selected === 1)" active />
+          <pagination-item @click="select(1)" :label="1" v-else />
+          <div class="mt-2 mx-2" v-if="(books.page_selected !== 1)"> ... </div>
+          <pagination-item v-if="(books.page_selected != 1)" :label="books.page_selected" active/>
+          <div class="mt-2 mx-2" v-if="(books.page_selected != books.page)"> ... </div>
+          <pagination-item v-if="(books.page_selected != books.page)"  @click="select(books.page)" :label="books.page" />
+          
+          <pagination-item class="ms-3" v-if="(books.page_selected === books.page)" next disabled/>
+          <pagination-item class="ms-3" v-else @click="next" next/>
+        </pagination>
       </div>
     </div>
   </div>
 </template>
-<script>
-export default {
-  name: 'DashboardDefault',
-  components: {},
-  data () {
-    return {
-      selected: null,
-      options: [
-        { value: 'A', text: 'Option A (from options prop)' },
-        { value: 'B', text: 'Option B (from options prop)' }
-      ]
-    }
+
+<style scoped>
+  .container{
+    background-color: #fff;
   }
-}
-</script>
+  .list {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+  }
+  .list li {
+    float: left;
+    padding: .5rem;
+    
+  }
+
+  .book:hover{
+    background-color: #EDEFF0;
+    border-radius: 10px;
+  }
+  .list li a{
+    text-align: center;
+    padding-top: .1rem;
+    padding-left: .5rem;
+    padding-right: .5rem;
+    padding-bottom: .1rem;
+    border-radius: 50%;
+  }
+
+  img {
+    width: 100px;
+  }
+  
+</style>

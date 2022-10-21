@@ -1,48 +1,30 @@
 import { createRouter, createWebHashHistory } from "vue-router";
 import Home from "@/views/Home.vue";
-import Tables from "@/views/Tables.vue";
-import Billing from "@/views/Billing.vue";
 import Profile from "@/views/Profile.vue";
-/* import VirtualReality from "@/views/VirtualReality.vue"; */
-
 import SignIn from "@/views/SignIn.vue";
 import SignUp from "@/views/SignUp.vue";
+import Detail from "@/views/Detail.vue";
+import History from "@/views/History.vue";
+import CreateBook from "@/views/CreateBook.vue";
+import EditBook from "@/views/EditBook.vue";
 
 const routes = [
   {
     path: "/",
     name: "/",
-    redirect: "/Home",
+    redirect: "/sign-in",
   },
   {
     path: "/Home",
-    name: "Dashboard",
+    name: "Books",
     component: Home,
-  },
-  {
-    path: "/tables",
-    name: "Tables",
-    component: Tables,
-  },
-  {
-    path: "/billing",
-    name: "Billing",
-    component: Billing,
+    
   },
   {
     path: "/profile",
     name: "Profile",
     component: Profile,
-  },/* {
-    path: "/virtual-reality",
-    name: "Virtual Reality",
-    component: VirtualReality,
-  }, */
-  // {
-  //   path: "/rtl-page",
-  //   name: "Rtl",
-  //   component: Rtl,
-  // },
+  },
   {
     path: "/sign-in",
     name: "Sign In",
@@ -52,6 +34,26 @@ const routes = [
     path: "/sign-up",
     name: "Sign Up",
     component: SignUp,
+  },
+  {
+    path: "/detail",
+    name: "Detail",
+    component: Detail,
+  },
+  {
+    path: "/history",
+    name: "History",
+    component: History,
+  },
+  {
+    path: "/createBook",
+    name: "CreateBook",
+    component: CreateBook,
+  },
+  {
+    path: "/editBook",
+    name: "EditBook",
+    component: EditBook,
   },
 ];
 

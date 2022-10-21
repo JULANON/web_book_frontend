@@ -1,6 +1,6 @@
 <template>
   <aside
-    id="sidenav-main"
+    id="sidenav-admin-main"
     class="my-3 overflow-auto border-0 sidenav navbar navbar-vertical navbar-expand-xs border-radius-xl"
     :class="$store.state.isRTL ? 'me-3 rotate-caret' : 'ms-3'"
     :data-color="sidenavActiveBgColors"
@@ -21,7 +21,7 @@
   </aside>
 </template>
 <script>
-import SidenavList from "./SidenavList.vue";
+import SidenavList from "./SidenavList_admin.vue";
 import logo from "../img/library-logo-template-design-free-vector.jpg";
 
 export default {

@@ -5,13 +5,13 @@
       :class="$store.state.isRTL ? '' : ' me-sm-6'"
     >
       <li class="text-sm breadcrumb-item" :class="textWhite">
-        <a
+        <router-link 
           v-if="$store.state.isRTL"
           :class="textWhite"
           class="opacity-5 ps-2"
-          href="#"
-        ></a>
-        <a v-else :class="textWhite" class="opacity-8" href="#">Home</a>
+          to="/Home"
+        ></router-link>
+        <router-link v-else :class="textWhite" class="opacity-8" to="/Home">Home</router-link>
       </li>
       <li
         class="text-sm breadcrumb-item active"

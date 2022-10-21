@@ -23,7 +23,6 @@ export default createStore({
     navbarMinimize(state) {
       const sidenav_show = document.querySelector(".g-sidenav-show");
       const sidenav = document.getElementById("sidenav-main");
-
       if (sidenav_show.classList.contains("g-sidenav-pinned")) {
         sidenav_show.classList.remove("g-sidenav-pinned");
         setTimeout(function () {
@@ -37,6 +36,7 @@ export default createStore({
         sidenav.classList.remove("bg-transparent");
         state.isPinned = false;
       }
+      
     },
     sidebarType(state, payload) {
       state.isTransparent = payload;

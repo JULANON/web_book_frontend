@@ -7,7 +7,7 @@
     <div class="container">
       <router-link
         class="navbar-brand font-weight-bolder ms-lg-0 ms-3"
-        to="/dashboard"
+        to="/Home"
         v-bind="$attrs"
         :class="isBlur ? 'text-dark' : 'text-white'"
       >Vite Soft UI Dashboard</router-link>
@@ -32,7 +32,7 @@
             <router-link
               class="nav-link d-flex align-items-center me-2 active"
               aria-current="page"
-              to="/dashboard"
+              to="/Home"
             >
               <i
                 class="fa fa-chart-pie opacity-6 me-1"
