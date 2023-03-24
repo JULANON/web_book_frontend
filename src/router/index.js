@@ -3,10 +3,14 @@ import Home from "@/views/Home.vue";
 import Profile from "@/views/Profile.vue";
 import SignIn from "@/views/SignIn.vue";
 import SignUp from "@/views/SignUp.vue";
+<<<<<<< Updated upstream
 import Detail from "@/views/Detail.vue";
 import History from "@/views/History.vue";
 import CreateBook from "@/views/CreateBook.vue";
 import EditBook from "@/views/EditBook.vue";
+=======
+import bank from "@/views/bank.vue";
+>>>>>>> Stashed changes
 
 const routes = [
   {
@@ -36,6 +40,7 @@ const routes = [
     component: SignUp,
   },
   {
+<<<<<<< Updated upstream
     path: "/detail",
     name: "Detail",
     component: Detail,
@@ -54,6 +59,11 @@ const routes = [
     path: "/editBook",
     name: "EditBook",
     component: EditBook,
+=======
+    path: "/bank",
+    name: "Bank",
+    component: bank,
+>>>>>>> Stashed changes
   },
 ];
 
